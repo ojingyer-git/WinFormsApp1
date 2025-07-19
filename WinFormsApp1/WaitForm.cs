@@ -29,7 +29,7 @@ namespace WinFormsApp1
                      
                 pictureBox1.BackColor = Color.Transparent;
 
-                gifImage = Image.FromFile("your_gif_image.gif");
+                gifImage = Properties.Resources.your_gif_image;//Image.FromFile("your_gif_image.gif");
                 pictureBox1.Image = gifImage;
                 StartAnimation();
 

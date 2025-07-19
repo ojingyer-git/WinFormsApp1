@@ -28,6 +28,8 @@ namespace WinFormsApp1
             jetProgressBar1.Minimum = 0;
             jetProgressBar1.Maximum = 100;
             jetProgressBar1.Value = 20;
+
+            closeButtonImage = Properties.Resources.Close;
         }
 
         class DerivedDataGridView : DataGridView
@@ -600,6 +602,45 @@ namespace WinFormsApp1
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
 
+        }
+
+        private Image closeButtonImage;
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            TabPage tabPage = tabControl1.TabPages[e.Index];
+            Rectangle tabRect = tabControl1.GetTabRect(e.Index);
+
+            // 탭 텍스트 그리기
+            g.DrawString(tabPage.Text, tabControl1.Font, Brushes.Black, tabRect.Left + 2, tabRect.Top + 2);
+
+            // 닫기 버튼 그리기
+            int closeButtonX = tabRect.Right - closeButtonImage.Width - 2;
+            int closeButtonY = tabRect.Top + (tabRect.Height - closeButtonImage.Height) / 2;
+            g.DrawImage(closeButtonImage, closeButtonX, closeButtonY, closeButtonImage.Width, closeButtonImage.Height);
+        }
+
+        private void tabControl1_MouseClick(object sender, MouseEventArgs e)
+        {
+            for (int i = 0; i < tabControl1.TabPages.Count; i++)
+            {
+                Rectangle tabRect = tabControl1.GetTabRect(i);
+                int closeButtonX = tabRect.Right - closeButtonImage.Width - 2;
+                int closeButtonY = tabRect.Top + (tabRect.Height - closeButtonImage.Height) / 2;
+                Rectangle closeButtonRect = new Rectangle(closeButtonX, closeButtonY, closeButtonImage.Width, closeButtonImage.Height);
+
+                if (closeButtonRect.Contains(e.Location))
+                {
+                    tabControl1.TabPages.RemoveAt(i);
+                    break; // 하나의 탭만 닫도록
+                }
+            }
+        }
+
+        private void 탭추가ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TabPage newTabPage = new TabPage("New Tab");
+            tabControl1.TabPages.Add(newTabPage);
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
