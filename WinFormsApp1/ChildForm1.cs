@@ -19,6 +19,7 @@ namespace WinFormsApp1
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private string filePath = "";
         private DataObject dataObj1, dataObj2;
+        private WaitForm waitForm = new WaitForm();
 
         public ChildForm1()
         {
@@ -217,6 +218,8 @@ namespace WinFormsApp1
         [STAThread]
         private void excel클리보드로저장ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            waitForm.ShowDialog();
+            return;
             //    Export_Excel(dataGridView1, "excel_test");
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -236,9 +239,13 @@ namespace WinFormsApp1
             toolStripProgressBar1.Minimum = 0;
             toolStripProgressBar1.Maximum = 60;
             toolStripProgressBar1.Value = 0;
-            
+
             backgroundWorker1.RunWorkerAsync();
             timer.Start();
+
+            SetTextSafe("");
+            Export_Excel();
+           
         }
 
         
@@ -282,6 +289,8 @@ namespace WinFormsApp1
 
                 MessageBox.Show("저장완료");
             }
+
+            waitForm.Close();
         }
         void Export_Excel(DataGridView grid, string fileName = "")
         {
@@ -576,10 +585,11 @@ namespace WinFormsApp1
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            Thread staThread = new Thread(new ThreadStart(DoSTAWork));
-            staThread.SetApartmentState(ApartmentState.STA);
-            staThread.Start();
-            staThread.Join(); // 작업 완료까지 대기
+            waitForm.ShowDialog();
+            //Thread staThread = new Thread(new ThreadStart(DoSTAWork));
+            //staThread.SetApartmentState(ApartmentState.STA);
+            //staThread.Start();
+            //staThread.Join(); // 작업 완료까지 대기
         }
         private void DoSTAWork()
         {
