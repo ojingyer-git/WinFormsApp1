@@ -1,18 +1,21 @@
-﻿using System;
+﻿using ExcelDataReader;
+
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Windows.Forms;
-using System.Reflection;
 using System.IO;
-using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
-using Excel = Microsoft.Office.Interop.Excel;
-using ExcelDataReader;
 using System.Threading;
+using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
+using sct = ScottPlot;
 
 namespace WinFormsApp1
 {
-    
+
     public partial class ChildForm1 : Form
     {
         private DataTable bk_dt = new DataTable();
@@ -39,13 +42,13 @@ namespace WinFormsApp1
                 DoubleBuffered = true;
             }
         }
-        
+
         private void ChildForm1_Load(object sender, EventArgs e)
         {
             dataGridView1.DoubleBuffered(true);
             //            toolStripProgressBar1.Width = 350;
             timer.Interval = 1000; // 1초마다
-            
+
             timer.Tick += Timer_Tick;
         }
 
@@ -53,6 +56,10 @@ namespace WinFormsApp1
         {
             // 입력 값을 0에서 1 사이로 정규화합니다.
             value = Math.Max(0, Math.Min(1, value));
+
+            var cmap = new ScottPlot.Colormaps.Turbo();
+            sct.Color cl = cmap.GetColor(value);
+            return Color.FromArgb(cl.Alpha, cl.Red, cl.Green, cl.Blue);
 
             // Jet 컬러 스펙트럼을 정의합니다.
             float r, g, b;
@@ -137,7 +144,7 @@ namespace WinFormsApp1
             return form;
         }
 
-        
+
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
@@ -170,12 +177,12 @@ namespace WinFormsApp1
             bk_dt = dt.Copy();
             dataGridView1.DataSource = dt;
 
-//            this.ResumeLayout(false);
+            //            this.ResumeLayout(false);
         }
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex > 2 && e.RowIndex < dataGridView1.RowCount-1 && e.RowIndex >= 0)
+            if (e.ColumnIndex > 2 && e.RowIndex < dataGridView1.RowCount - 1 && e.RowIndex >= 0)
             {
                 string val = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 if (val.IndexOf("/") != -1)
@@ -202,19 +209,19 @@ namespace WinFormsApp1
             workBook = excelApp.Workbooks.Add();                            // 워크북 추가
             workSheet = workBook.Worksheets.get_Item(1) as Excel.Worksheet;
 
-            for (int r = 0; r<dataGridView1.RowCount-1; r++)
+            for (int r = 0; r < dataGridView1.RowCount - 1; r++)
             {
-                for (int c = 0; c<dataGridView1.ColumnCount; c++)
+                for (int c = 0; c < dataGridView1.ColumnCount; c++)
                 {
                     workSheet.Cells[r + 1][c + 1] = dataGridView1.Rows[r].Cells[c].Value.ToString();
-                }    
+                }
             }
 
             workSheet.Columns.AutoFit();                                    // 열 너비 자동 맞춤
             workBook.SaveAs(path, Excel.XlFileFormat.xlWorkbookDefault);    // 엑셀 파일 저장
             workBook.Close(true);
             excelApp.Quit();
-            
+
         }
 
         [STAThread]
@@ -247,14 +254,14 @@ namespace WinFormsApp1
 
             SetTextSafe("");
             Export_Excel();
-           
+
         }
 
-        
+
 
         void Export_Excel()
         {
-            if(dataObj1 != null && dataObj2 != null)
+            if (dataObj1 != null && dataObj2 != null)
             {
                 excelApp = new Excel.Application();                             // 엑셀 어플리케이션 생성
                 workBook = excelApp.Workbooks.Add();                            // 워크북 추가
@@ -298,7 +305,7 @@ namespace WinFormsApp1
         {
             string val;
             string[] word;
- //           dataGridView1.DataSource = bk_dt.Copy();
+            //           dataGridView1.DataSource = bk_dt.Copy();
 
             for (int r = 0; r < dataGridView1.RowCount - 1; r++)
             {
@@ -311,7 +318,7 @@ namespace WinFormsApp1
                         word = val.Split('/');
                         dataGridView1.Rows[r].Cells[c].Value = word[1];
                     }
-                    
+
                 }
             }
 
@@ -607,34 +614,34 @@ namespace WinFormsApp1
         private Image closeButtonImage;
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
-            Graphics g = e.Graphics;
-            TabPage tabPage = tabControl1.TabPages[e.Index];
-            Rectangle tabRect = tabControl1.GetTabRect(e.Index);
+            //Graphics g = e.Graphics;
+            //TabPage tabPage = tabControl1.TabPages[e.Index];
+            //Rectangle tabRect = tabControl1.GetTabRect(e.Index);
 
-            // 탭 텍스트 그리기
-            g.DrawString(tabPage.Text, tabControl1.Font, Brushes.Black, tabRect.Left + 2, tabRect.Top + 2);
+            //// 탭 텍스트 그리기
+            //g.DrawString(tabPage.Text, tabControl1.Font, Brushes.Black, tabRect.Left + 2, tabRect.Top + 2);
 
-            // 닫기 버튼 그리기
-            int closeButtonX = tabRect.Right - closeButtonImage.Width - 2;
-            int closeButtonY = tabRect.Top + (tabRect.Height - closeButtonImage.Height) / 2;
-            g.DrawImage(closeButtonImage, closeButtonX, closeButtonY, closeButtonImage.Width, closeButtonImage.Height);
+            //// 닫기 버튼 그리기
+            //int closeButtonX = tabRect.Right - closeButtonImage.Width - 2;
+            //int closeButtonY = tabRect.Top + (tabRect.Height - closeButtonImage.Height) / 2;
+            //g.DrawImage(closeButtonImage, closeButtonX, closeButtonY, closeButtonImage.Width, closeButtonImage.Height);
         }
 
         private void tabControl1_MouseClick(object sender, MouseEventArgs e)
         {
-            for (int i = 0; i < tabControl1.TabPages.Count; i++)
-            {
-                Rectangle tabRect = tabControl1.GetTabRect(i);
-                int closeButtonX = tabRect.Right - closeButtonImage.Width - 2;
-                int closeButtonY = tabRect.Top + (tabRect.Height - closeButtonImage.Height) / 2;
-                Rectangle closeButtonRect = new Rectangle(closeButtonX, closeButtonY, closeButtonImage.Width, closeButtonImage.Height);
+            //for (int i = 0; i < tabControl1.TabPages.Count; i++)
+            //{
+            //    Rectangle tabRect = tabControl1.GetTabRect(i);
+            //    int closeButtonX = tabRect.Right - closeButtonImage.Width - 2;
+            //    int closeButtonY = tabRect.Top + (tabRect.Height - closeButtonImage.Height) / 2;
+            //    Rectangle closeButtonRect = new Rectangle(closeButtonX, closeButtonY, closeButtonImage.Width, closeButtonImage.Height);
 
-                if (closeButtonRect.Contains(e.Location))
-                {
-                    tabControl1.TabPages.RemoveAt(i);
-                    break; // 하나의 탭만 닫도록
-                }
-            }
+            //    if (closeButtonRect.Contains(e.Location))
+            //    {
+            //        tabControl1.TabPages.RemoveAt(i);
+            //        break; // 하나의 탭만 닫도록
+            //    }
+            //}
         }
 
         private void 탭추가ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -646,6 +653,47 @@ namespace WinFormsApp1
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             timer.Stop();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            ScottPlot.Palettes.Category10 palette = new();
+
+            // create 5 groups of stacked bars
+            for (int i = 0; i < 5; i++)
+            {
+                // create 3 individual bars with stacking
+                List<ScottPlot.Bar> bars = [];
+                double valueBase = 0;
+                for (int j = 0; j < 3; j++)
+                {
+                    double barSize = sct.Generate.RandomInteger(10, 20);
+                    ScottPlot.Bar bar1 = new()
+                    {
+                        FillColor = palette.GetColor(j),
+                        Position = i,
+                        ValueBase = valueBase,
+                        Value = valueBase + barSize,
+                        Label = $"{barSize}",
+                        CenterLabel = true,
+                    };
+
+                    bars.Add(bar1);
+                    valueBase += barSize;
+                }
+
+                // plot the stacked bars
+                var barPlot = formsPlot1.Plot.Add.Bars(bars);
+                barPlot.Horizontal = true;
+            }
+
+            formsPlot1.Plot.Axes.Margins(left: 0);
+
+            // add custom group labels
+            double[] tickPositions = sct.Generate.Consecutive(5);
+            string[] tickLabels = Enumerable.Range(1, 5).Select(x => $"Worker #{x}").ToArray();
+            formsPlot1.Plot.Axes.Left.SetTicks(tickPositions, tickLabels);
+
         }
     }
 }
