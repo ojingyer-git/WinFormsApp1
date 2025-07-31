@@ -34,6 +34,7 @@ namespace WinFormsApp1
             dataGridView1 = new System.Windows.Forms.DataGridView();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPage1 = new System.Windows.Forms.TabPage();
+            formsPlot1 = new ScottPlot.WinForms.FormsPlot();
             tabPage2 = new System.Windows.Forms.TabPage();
             pictureBox1 = new System.Windows.Forms.PictureBox();
             jetProgressBar1 = new JetProgressBar();
@@ -43,11 +44,14 @@ namespace WinFormsApp1
             excel저장ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             excel클리보드로저장ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             탭추가ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            plot1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            plot2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            formsPlot1 = new ScottPlot.WinForms.FormsPlot();
-            toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            plot3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -114,12 +118,21 @@ namespace WinFormsApp1
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // formsPlot1
+            // 
+            formsPlot1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            formsPlot1.DisplayScale = 1F;
+            formsPlot1.Location = new System.Drawing.Point(3, 3);
+            formsPlot1.Name = "formsPlot1";
+            formsPlot1.Size = new System.Drawing.Size(664, 753);
+            formsPlot1.TabIndex = 0;
+            // 
             // tabPage2
             // 
             tabPage2.Location = new System.Drawing.Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            tabPage2.Size = new System.Drawing.Size(676, 449);
+            tabPage2.Size = new System.Drawing.Size(676, 762);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
@@ -142,7 +155,7 @@ namespace WinFormsApp1
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton1, toolStripDropDownButton1, toolStripButton2 });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton1, toolStripDropDownButton1, toolStripButton2, toolStripDropDownButton2 });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(1389, 25);
@@ -190,6 +203,40 @@ namespace WinFormsApp1
             탭추가ToolStripMenuItem.Text = "탭 추가";
             탭추가ToolStripMenuItem.Click += 탭추가ToolStripMenuItem_Click;
             // 
+            // toolStripButton2
+            // 
+            toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButton2.Image = (System.Drawing.Image)resources.GetObject("toolStripButton2.Image");
+            toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton2.Name = "toolStripButton2";
+            toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            toolStripButton2.Text = "toolStripButton2";
+            toolStripButton2.Click += toolStripButton2_Click;
+            // 
+            // toolStripDropDownButton2
+            // 
+            toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { plot1ToolStripMenuItem, plot2ToolStripMenuItem, plot3ToolStripMenuItem });
+            toolStripDropDownButton2.Image = (System.Drawing.Image)resources.GetObject("toolStripDropDownButton2.Image");
+            toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            toolStripDropDownButton2.Size = new System.Drawing.Size(29, 22);
+            toolStripDropDownButton2.Text = "toolStripDropDownButton2";
+            // 
+            // plot1ToolStripMenuItem
+            // 
+            plot1ToolStripMenuItem.Name = "plot1ToolStripMenuItem";
+            plot1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            plot1ToolStripMenuItem.Text = "Plot1";
+            plot1ToolStripMenuItem.Click += plot1ToolStripMenuItem_Click;
+            // 
+            // plot2ToolStripMenuItem
+            // 
+            plot2ToolStripMenuItem.Name = "plot2ToolStripMenuItem";
+            plot2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            plot2ToolStripMenuItem.Text = "Plot2";
+            plot2ToolStripMenuItem.Click += plot2ToolStripMenuItem_Click;
+            // 
             // statusStrip1
             // 
             statusStrip1.AutoSize = false;
@@ -214,23 +261,12 @@ namespace WinFormsApp1
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // formsPlot1
+            // plot3ToolStripMenuItem
             // 
-            formsPlot1.DisplayScale = 1F;
-            formsPlot1.Location = new System.Drawing.Point(6, 6);
-            formsPlot1.Name = "formsPlot1";
-            formsPlot1.Size = new System.Drawing.Size(664, 421);
-            formsPlot1.TabIndex = 0;
-            // 
-            // toolStripButton2
-            // 
-            toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButton2.Image = (System.Drawing.Image)resources.GetObject("toolStripButton2.Image");
-            toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            toolStripButton2.Text = "toolStripButton2";
-            toolStripButton2.Click += toolStripButton2_Click;
+            plot3ToolStripMenuItem.Name = "plot3ToolStripMenuItem";
+            plot3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            plot3ToolStripMenuItem.Text = "Plot3";
+            plot3ToolStripMenuItem.Click += plot3ToolStripMenuItem_Click;
             // 
             // ChildForm1
             // 
@@ -280,5 +316,9 @@ namespace WinFormsApp1
         private System.Windows.Forms.ToolStripMenuItem 탭추가ToolStripMenuItem;
         private ScottPlot.WinForms.FormsPlot formsPlot1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+        private System.Windows.Forms.ToolStripMenuItem plot1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem plot2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem plot3ToolStripMenuItem;
     }
 }

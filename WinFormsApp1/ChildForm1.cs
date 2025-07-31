@@ -52,6 +52,13 @@ namespace WinFormsApp1
             timer.Tick += Timer_Tick;
         }
 
+        private sct.Color sctGetJetColor(float value)
+        {
+            value = Math.Max(0, Math.Min(1, value));
+
+            var cmap = new ScottPlot.Colormaps.Turbo();
+            return cmap.GetColor(value);
+        }
         private Color GetJetColor(float value)
         {
             // 입력 값을 0에서 1 사이로 정규화합니다.
@@ -659,23 +666,29 @@ namespace WinFormsApp1
         {
             ScottPlot.Palettes.Category10 palette = new();
 
+            formsPlot1.Plot.Clear();
+
             // create 5 groups of stacked bars
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 // create 3 individual bars with stacking
                 List<ScottPlot.Bar> bars = [];
                 double valueBase = 0;
-                for (int j = 0; j < 3; j++)
+                double[] heights = ScottPlot.SampleData.MaleHeights();
+                var hist = ScottPlot.Statistics.Histogram.WithBinSize(2, heights);
+
+                for (int j = 0; j < hist.Counts.Length; j++)
                 {
-                    double barSize = sct.Generate.RandomInteger(10, 20);
+                    double barSize = hist.Counts.Length / 2;//sct.Generate.RandomInteger(10, 20);
+                    double ran = sct.Generate.RandomInteger(10, 100);
                     ScottPlot.Bar bar1 = new()
                     {
-                        FillColor = palette.GetColor(j),
+                        FillColor = sctGetJetColor((float)(hist.Counts[j] - hist.Counts.Min()) / (hist.Counts.Max() - hist.Counts.Min())), //palette.GetColor(j),
                         Position = i,
                         ValueBase = valueBase,
                         Value = valueBase + barSize,
-                        Label = $"{barSize}",
-                        CenterLabel = true,
+                        //    Label = $"{barSize}",
+                        //    CenterLabel = true,
                     };
 
                     bars.Add(bar1);
@@ -693,6 +706,114 @@ namespace WinFormsApp1
             double[] tickPositions = sct.Generate.Consecutive(5);
             string[] tickLabels = Enumerable.Range(1, 5).Select(x => $"Worker #{x}").ToArray();
             formsPlot1.Plot.Axes.Left.SetTicks(tickPositions, tickLabels);
+            formsPlot1.Refresh();
+        }
+
+        private void plot1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formsPlot1.Plot.Clear();
+
+            List<(string name, double[] edges)> ranges =
+            [
+                ("Ontario", [-9, 3, 7, 13, 27]),
+                ("England", [4, 7, 12, 16, 24]),
+                ("Kentucky", [-4, 7, 13, 20, 30]),
+            ];
+
+            formsPlot1.Plot.Add.StackedRanges(ranges, horizontal: true);
+            formsPlot1.Plot.Axes.AutoScale();
+            formsPlot1.Refresh();
+        }
+
+        private void plot2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formsPlot1.Plot.Clear();
+
+            for (int i = 0; i < 5; i++)
+            {
+                double[] values = ScottPlot.SampleData.MaleHeights();//sct.Generate.RandomNormal(10, mean: 3 + i);
+                var pop = formsPlot1.Plot.Add.Population(values, x: i);
+
+                // disable visibility of the bar symbol
+                pop.Bar.IsVisible = false;
+
+                // enable visibility of the box symbol
+                pop.Box.IsVisible = true;
+                pop.Box.FillColor = pop.Marker.MarkerLineColor.WithAlpha(.5);
+
+            }
+
+            sct.Tick[] ticks =
+            {
+                new(0, "First Long Title"),
+                new(1, "Second Long Title"),
+                new(2, "Third Long Title"),
+                new(3, "Fourth Long Title"),
+                new(4, "Fifth Long Title"),
+                new(5, "Sixth Long Title")
+            };
+            formsPlot1.Plot.Axes.Bottom.TickGenerator = new ScottPlot.TickGenerators.NumericManual(ticks);
+            formsPlot1.Plot.Axes.Bottom.TickLabelStyle.Rotation = 45;
+            formsPlot1.Plot.Axes.Bottom.TickLabelStyle.Alignment = sct.Alignment.MiddleLeft;
+
+            // determine the width of the largest tick label
+            float largestLabelWidth = 0;
+            //using sct.SKPaint paint = new();
+            foreach (sct.Tick tick in ticks)
+            {
+                sct.PixelSize size = formsPlot1.Plot.Axes.Bottom.TickLabelStyle.Measure(tick.Label).Size;
+                largestLabelWidth = Math.Max(largestLabelWidth, size.Width);
+            }
+
+            // ensure axis panels do not get smaller than the largest label
+            formsPlot1.Plot.Axes.Bottom.MinimumSize = largestLabelWidth;
+            formsPlot1.Plot.Axes.Right.MinimumSize = largestLabelWidth;
+
+            // refine appearance of the plot
+            formsPlot1.Plot.HideGrid();
+
+            formsPlot1.Plot.Axes.AutoScale();
+            formsPlot1.Refresh();
+        }
+
+        private void plot3ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formsPlot1.Plot.Clear();
+
+            // create a bar plot
+            double[] values = { 5, 10, 7, 13, 25, 60 };
+            formsPlot1.Plot.Add.Bars(values);
+            formsPlot1.Plot.Axes.Margins(bottom: 0);
+
+            // create a tick for each bar
+            sct.Tick[] ticks =
+            {
+                new(0, "First Long Title"),
+                new(1, "Second Long Title"),
+                new(2, "Third Long Title"),
+                new(3, "Fourth Long Title"),
+                new(4, "Fifth Long Title"),
+                new(5, "Sixth Long Title")
+            };
+            formsPlot1.Plot.Axes.Bottom.TickGenerator = new ScottPlot.TickGenerators.NumericManual(ticks);
+            formsPlot1.Plot.Axes.Bottom.TickLabelStyle.Rotation = 45;
+            formsPlot1.Plot.Axes.Bottom.TickLabelStyle.Alignment = sct.Alignment.MiddleLeft;
+
+            // determine the width of the largest tick label
+            float largestLabelWidth = 0;
+            //using sct.SKPaint paint = new();
+            foreach (sct.Tick tick in ticks)
+            {
+                sct.PixelSize size = formsPlot1.Plot.Axes.Bottom.TickLabelStyle.Measure(tick.Label).Size;
+                largestLabelWidth = Math.Max(largestLabelWidth, size.Width);
+            }
+
+            // ensure axis panels do not get smaller than the largest label
+            formsPlot1.Plot.Axes.Bottom.MinimumSize = largestLabelWidth;
+            formsPlot1.Plot.Axes.Right.MinimumSize = largestLabelWidth;
+
+            formsPlot1.Plot.Axes.AutoScale();
+            formsPlot1.Refresh();
 
         }
     }
