@@ -36,6 +36,8 @@ namespace WinFormsApp1
             tabPage1 = new System.Windows.Forms.TabPage();
             formsPlot1 = new ScottPlot.WinForms.FormsPlot();
             tabPage2 = new System.Windows.Forms.TabPage();
+            tabPage3 = new System.Windows.Forms.TabPage();
+            scintilla1 = new ScintillaNET.Scintilla();
             pictureBox1 = new System.Windows.Forms.PictureBox();
             jetProgressBar1 = new JetProgressBar();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -48,10 +50,11 @@ namespace WinFormsApp1
             toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             plot1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             plot2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            plot3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            plot3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            tabPage4 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -59,6 +62,7 @@ namespace WinFormsApp1
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -74,12 +78,14 @@ namespace WinFormsApp1
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.Controls.Add(dataGridView1);
+            splitContainer1.Panel1.Cursor = System.Windows.Forms.Cursors.Default;
             // 
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(tabControl1);
             splitContainer1.Panel2.Controls.Add(pictureBox1);
             splitContainer1.Panel2.Controls.Add(jetProgressBar1);
+            splitContainer1.Panel2.Cursor = System.Windows.Forms.Cursors.Default;
             splitContainer1.Size = new System.Drawing.Size(1389, 903);
             splitContainer1.SplitterDistance = 674;
             splitContainer1.TabIndex = 0;
@@ -99,6 +105,8 @@ namespace WinFormsApp1
             tabControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage4);
             tabControl1.Location = new System.Drawing.Point(15, 88);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -120,12 +128,15 @@ namespace WinFormsApp1
             // 
             // formsPlot1
             // 
-            formsPlot1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             formsPlot1.DisplayScale = 1F;
+            formsPlot1.Dock = System.Windows.Forms.DockStyle.Fill;
             formsPlot1.Location = new System.Drawing.Point(3, 3);
             formsPlot1.Name = "formsPlot1";
-            formsPlot1.Size = new System.Drawing.Size(664, 753);
+            formsPlot1.Size = new System.Drawing.Size(670, 756);
             formsPlot1.TabIndex = 0;
+            formsPlot1.MouseDown += formsPlot1_MouseDown;
+            formsPlot1.MouseMove += formsPlot1_MouseMove;
+            formsPlot1.MouseUp += formsPlot1_MouseUp;
             // 
             // tabPage2
             // 
@@ -136,6 +147,28 @@ namespace WinFormsApp1
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(scintilla1);
+            tabPage3.Location = new System.Drawing.Point(4, 24);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            tabPage3.Size = new System.Drawing.Size(676, 762);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "tabPage3";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // scintilla1
+            // 
+            scintilla1.AutocompleteListSelectedBackColor = System.Drawing.Color.FromArgb(0, 120, 212);
+            scintilla1.LexerName = null;
+            scintilla1.Location = new System.Drawing.Point(27, 40);
+            scintilla1.Name = "scintilla1";
+            scintilla1.ScrollWidth = 49;
+            scintilla1.Size = new System.Drawing.Size(610, 313);
+            scintilla1.TabIndex = 0;
+            scintilla1.Text = "scintilla1";
             // 
             // pictureBox1
             // 
@@ -226,16 +259,23 @@ namespace WinFormsApp1
             // plot1ToolStripMenuItem
             // 
             plot1ToolStripMenuItem.Name = "plot1ToolStripMenuItem";
-            plot1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            plot1ToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             plot1ToolStripMenuItem.Text = "Plot1";
             plot1ToolStripMenuItem.Click += plot1ToolStripMenuItem_Click;
             // 
             // plot2ToolStripMenuItem
             // 
             plot2ToolStripMenuItem.Name = "plot2ToolStripMenuItem";
-            plot2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            plot2ToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             plot2ToolStripMenuItem.Text = "Plot2";
             plot2ToolStripMenuItem.Click += plot2ToolStripMenuItem_Click;
+            // 
+            // plot3ToolStripMenuItem
+            // 
+            plot3ToolStripMenuItem.Name = "plot3ToolStripMenuItem";
+            plot3ToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            plot3ToolStripMenuItem.Text = "Plot3";
+            plot3ToolStripMenuItem.Click += plot3ToolStripMenuItem_Click;
             // 
             // statusStrip1
             // 
@@ -261,12 +301,15 @@ namespace WinFormsApp1
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // plot3ToolStripMenuItem
+            // tabPage4
             // 
-            plot3ToolStripMenuItem.Name = "plot3ToolStripMenuItem";
-            plot3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            plot3ToolStripMenuItem.Text = "Plot3";
-            plot3ToolStripMenuItem.Click += plot3ToolStripMenuItem_Click;
+            tabPage4.Location = new System.Drawing.Point(4, 24);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            tabPage4.Size = new System.Drawing.Size(676, 762);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "tabPage4";
+            tabPage4.UseVisualStyleBackColor = true;
             // 
             // ChildForm1
             // 
@@ -286,6 +329,7 @@ namespace WinFormsApp1
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -320,5 +364,8 @@ namespace WinFormsApp1
         private System.Windows.Forms.ToolStripMenuItem plot1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem plot2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem plot3ToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPage3;
+        private ScintillaNET.Scintilla scintilla1;
+        private System.Windows.Forms.TabPage tabPage4;
     }
 }

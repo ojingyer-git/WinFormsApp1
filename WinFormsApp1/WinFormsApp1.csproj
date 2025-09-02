@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows7.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <Authors>25.9.1.2</Authors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +21,9 @@
 
   <ItemGroup>
     <PackageReference Include="ExcelDataReader" Version="3.7.0" />
+    <PackageReference Include="Krypton.Docking" Version="95.25.8.235" />
+    <PackageReference Include="Krypton.Toolkit" Version="95.25.8.235" />
+    <PackageReference Include="Scintilla5.NET" Version="6.0.1" />
     <PackageReference Include="ScottPlot.WinForms" Version="5.0.55" />
   </ItemGroup>
 

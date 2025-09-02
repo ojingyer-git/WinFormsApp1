@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using Excel = Microsoft.Office.Interop.Excel;
 using sct = ScottPlot;
 
@@ -64,7 +65,7 @@ namespace WinFormsApp1
             // 입력 값을 0에서 1 사이로 정규화합니다.
             value = Math.Max(0, Math.Min(1, value));
 
-            var cmap = new ScottPlot.Colormaps.Turbo();
+            var cmap = new ScottPlot.Colormaps.MellowRainbow();//Turbo();
             sct.Color cl = cmap.GetColor(value);
             return Color.FromArgb(cl.Alpha, cl.Red, cl.Green, cl.Blue);
 
@@ -725,9 +726,18 @@ namespace WinFormsApp1
             formsPlot1.Refresh();
         }
 
+        sct.Coordinates[] DataPoints;
+        sct.Coordinates MouseDownCoordinates;
+        sct.Coordinates MouseNowCoordinates;
+        sct.CoordinateRect MouseSlectionRect => new(MouseDownCoordinates, MouseNowCoordinates);
+        bool MouseIsDown = false;
+        ScottPlot.Plottables.Rectangle RectanglePlot;
+
         private void plot2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             formsPlot1.Plot.Clear();
+
+            
 
             for (int i = 0; i < 5; i++)
             {
@@ -740,6 +750,7 @@ namespace WinFormsApp1
                 // enable visibility of the box symbol
                 pop.Box.IsVisible = true;
                 pop.Box.FillColor = pop.Marker.MarkerLineColor.WithAlpha(.5);
+            //    pop.Marker.MarkerSize = 7;
 
             }
 
@@ -771,6 +782,9 @@ namespace WinFormsApp1
 
             // refine appearance of the plot
             formsPlot1.Plot.HideGrid();
+
+            RectanglePlot = formsPlot1.Plot.Add.Rectangle(0, 0, 0, 0);
+            RectanglePlot.FillStyle.Color = sct.Colors.Red.WithAlpha(.2);
 
             formsPlot1.Plot.Axes.AutoScale();
             formsPlot1.Refresh();
@@ -815,6 +829,39 @@ namespace WinFormsApp1
             formsPlot1.Plot.Axes.AutoScale();
             formsPlot1.Refresh();
 
+        }
+
+        private void formsPlot1_MouseDown(object sender, MouseEventArgs e)
+        {
+            //MouseIsDown = true;
+            //RectanglePlot.IsVisible = true;
+            //MouseDownCoordinates = formsPlot1.Plot.GetCoordinates(e.X, e.Y);
+            //formsPlot1.UserInputProcessor.Disable();
+        }
+
+        private void formsPlot1_MouseUp(object sender, MouseEventArgs e)
+        {
+            //MouseIsDown = false;
+            //RectanglePlot.IsVisible = false;
+
+            //formsPlot1.Plot.Remove<ScottPlot.Plottables.Marker>();
+
+            //MouseDownCoordinates = sct.Coordinates.NaN;
+            //MouseNowCoordinates = sct.Coordinates.NaN;
+
+            //// update the plot
+            //formsPlot1.Refresh();
+            //formsPlot1.UserInputProcessor.Enable();
+        }
+
+        private void formsPlot1_MouseMove(object sender, MouseEventArgs e)
+        {
+            //if (!MouseIsDown)
+            //    return;
+
+            //MouseNowCoordinates = formsPlot1.Plot.GetCoordinates(e.X, e.Y);
+            //RectanglePlot.CoordinateRect = MouseSlectionRect;
+            //formsPlot1.Refresh();
         }
     }
 }
