@@ -57,11 +57,13 @@ namespace WinFormsApp1
             plot3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             odAnyFile = new System.Windows.Forms.OpenFileDialog();
-            toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            tabPage6 = new System.Windows.Forms.TabPage();
+            reoGridControl1 = new unvell.ReoGrid.ReoGridControl();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -75,6 +77,7 @@ namespace WinFormsApp1
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
+            tabPage6.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -117,6 +120,7 @@ namespace WinFormsApp1
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
             tabControl1.Controls.Add(tabPage5);
+            tabControl1.Controls.Add(tabPage6);
             tabControl1.Location = new System.Drawing.Point(15, 88);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -370,6 +374,16 @@ namespace WinFormsApp1
             toolStripButton4.Text = "toolStripButton4";
             toolStripButton4.Click += toolStripButton4_Click;
             // 
+            // toolStripButton5
+            // 
+            toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButton5.Image = (System.Drawing.Image)resources.GetObject("toolStripButton5.Image");
+            toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton5.Name = "toolStripButton5";
+            toolStripButton5.Size = new System.Drawing.Size(23, 22);
+            toolStripButton5.Text = "toolStripButton5";
+            toolStripButton5.Click += toolStripButton5_Click;
+            // 
             // statusStrip1
             // 
             statusStrip1.AutoSize = false;
@@ -399,15 +413,35 @@ namespace WinFormsApp1
             odAnyFile.FileName = "openFileDialog1";
             odAnyFile.Filter = "All files|*.*";
             // 
-            // toolStripButton5
+            // tabPage6
             // 
-            toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButton5.Image = (System.Drawing.Image)resources.GetObject("toolStripButton5.Image");
-            toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton5.Name = "toolStripButton5";
-            toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            toolStripButton5.Text = "toolStripButton5";
-            toolStripButton5.Click += toolStripButton5_Click;
+            tabPage6.Controls.Add(reoGridControl1);
+            tabPage6.Location = new System.Drawing.Point(4, 24);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            tabPage6.Size = new System.Drawing.Size(676, 762);
+            tabPage6.TabIndex = 5;
+            tabPage6.Text = "tabPage6";
+            tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // reoGridControl1
+            // 
+            reoGridControl1.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            reoGridControl1.ColumnHeaderContextMenuStrip = null;
+            reoGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            reoGridControl1.LeadHeaderContextMenuStrip = null;
+            reoGridControl1.Location = new System.Drawing.Point(3, 3);
+            reoGridControl1.Name = "reoGridControl1";
+            reoGridControl1.RowHeaderContextMenuStrip = null;
+            reoGridControl1.Script = null;
+            reoGridControl1.SheetTabContextMenuStrip = null;
+            reoGridControl1.SheetTabNewButtonVisible = true;
+            reoGridControl1.SheetTabVisible = true;
+            reoGridControl1.SheetTabWidth = 60;
+            reoGridControl1.ShowScrollEndSpacing = true;
+            reoGridControl1.Size = new System.Drawing.Size(670, 756);
+            reoGridControl1.TabIndex = 0;
+            reoGridControl1.Text = "reoGridControl1";
             // 
             // ChildForm1
             // 
@@ -435,6 +469,7 @@ namespace WinFormsApp1
             toolStrip1.PerformLayout();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
+            tabPage6.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
 
@@ -474,5 +509,7 @@ namespace WinFormsApp1
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.PropertyGrid propertyGrid1;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.TabPage tabPage6;
+        private unvell.ReoGrid.ReoGridControl reoGridControl1;
     }
 }

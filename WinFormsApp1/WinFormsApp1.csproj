@@ -29,6 +29,7 @@
     <PackageReference Include="Scintilla5.NET" Version="6.0.1" />
     <PackageReference Include="ScintillaDiff.NET" Version="1.1.14" />
     <PackageReference Include="ScottPlot.WinForms" Version="5.0.55" />
+    <PackageReference Include="unvell.ReoGrid.dll" Version="3.3.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,6 +49,10 @@
 
   <ItemGroup>
     <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdvancedDataGridView\AdvancedDataGridView.csproj" />
   </ItemGroup>
 
 </Project>

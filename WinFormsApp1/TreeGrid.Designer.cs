@@ -34,12 +34,14 @@
             Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             splitter1 = new System.Windows.Forms.Splitter();
-            Grid = new TenTec.Windows.iGridLib.iGrid();
             iGrid1DefaultCellStyle = new TenTec.Windows.iGridLib.iGCellStyle(true);
             iGrid1DefaultColHdrStyle = new TenTec.Windows.iGridLib.iGColHdrStyle(true);
-            iGrid1RowTextColCellStyle = new TenTec.Windows.iGridLib.iGCellStyle(true);
+            treeGridView1 = new AdvancedDataGridView.TreeGridView();
+            Column5 = new AdvancedDataGridView.TreeGridColumn();
+            Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)kryptonTreeGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Grid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)treeGridView1).BeginInit();
             SuspendLayout();
             // 
             // kryptonToolStrip1
@@ -59,6 +61,7 @@
             kryptonTreeGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Column1, Column2, Column3 });
             kryptonTreeGridView1.DataSource = null;
             kryptonTreeGridView1.Dock = System.Windows.Forms.DockStyle.Left;
+            kryptonTreeGridView1.DoubleBuffered = false;
             kryptonTreeGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             kryptonTreeGridView1.ImageList = null;
             kryptonTreeGridView1.Location = new System.Drawing.Point(0, 25);
@@ -71,6 +74,7 @@
             Column1.DefaultNodeImage = null;
             Column1.HeaderText = "Column1";
             Column1.Name = "Column1";
+            Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Column2
@@ -95,29 +99,55 @@
             splitter1.TabIndex = 2;
             splitter1.TabStop = false;
             // 
-            // Grid
+            // treeGridView1
             // 
-            Grid.DefaultCol.CellStyle = iGrid1DefaultCellStyle;
-            Grid.DefaultCol.ColHdrStyle = iGrid1DefaultColHdrStyle;
-            Grid.Dock = System.Windows.Forms.DockStyle.Fill;
-            Grid.Location = new System.Drawing.Point(549, 25);
-            Grid.Name = "Grid";
-            Grid.Size = new System.Drawing.Size(593, 511);
-            Grid.TabIndex = 3;
+            treeGridView1.AllowUserToAddRows = false;
+            treeGridView1.AllowUserToDeleteRows = false;
+            treeGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Column5, Column6, Column7 });
+            treeGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            treeGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            treeGridView1.ImageList = null;
+            treeGridView1.Location = new System.Drawing.Point(549, 25);
+            treeGridView1.Name = "treeGridView1";
+            treeGridView1.Size = new System.Drawing.Size(593, 511);
+            treeGridView1.TabIndex = 3;
+            treeGridView1.CellPainting += treeGridView1_CellPainting;
+            // 
+            // Column5
+            // 
+            Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            Column5.DefaultNodeImage = null;
+            Column5.HeaderText = "Column5";
+            Column5.Name = "Column5";
+            Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            Column5.Width = 63;
+            // 
+            // Column6
+            // 
+            Column6.HeaderText = "Column6";
+            Column6.Name = "Column6";
+            Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column7
+            // 
+            Column7.HeaderText = "Column7";
+            Column7.Name = "Column7";
+            Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // TreeGrid
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1142, 536);
-            Controls.Add(Grid);
+            Controls.Add(treeGridView1);
             Controls.Add(splitter1);
             Controls.Add(kryptonTreeGridView1);
             Controls.Add(kryptonToolStrip1);
+            DoubleBuffered = true;
             Name = "TreeGrid";
             Text = "TreeGrid";
             ((System.ComponentModel.ISupportInitialize)kryptonTreeGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Grid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)treeGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -126,13 +156,15 @@
 
         private Krypton.Toolkit.KryptonToolStrip kryptonToolStrip1;
         private Krypton.Toolkit.Suite.Extended.TreeGridView.KryptonTreeGridView kryptonTreeGridView1;
+        private System.Windows.Forms.Splitter splitter1;
+        private TenTec.Windows.iGridLib.iGCellStyle iGrid1DefaultCellStyle;
+        private TenTec.Windows.iGridLib.iGColHdrStyle iGrid1DefaultColHdrStyle;
+        private AdvancedDataGridView.TreeGridView treeGridView1;
         private Krypton.Toolkit.Suite.Extended.TreeGridView.KryptonTreeGridColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.Splitter splitter1;
-        private TenTec.Windows.iGridLib.iGrid Grid;
-        private TenTec.Windows.iGridLib.iGCellStyle iGrid1DefaultCellStyle;
-        private TenTec.Windows.iGridLib.iGColHdrStyle iGrid1DefaultColHdrStyle;
-        private TenTec.Windows.iGridLib.iGCellStyle iGrid1RowTextColCellStyle;
+        private AdvancedDataGridView.TreeGridColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
     }
 }
