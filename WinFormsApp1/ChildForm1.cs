@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -25,6 +26,8 @@ namespace WinFormsApp1
         private DataObject dataObj1, dataObj2;
         private WaitForm waitForm = new WaitForm();
 
+
+
         public ChildForm1()
         {
             InitializeComponent();
@@ -34,6 +37,8 @@ namespace WinFormsApp1
             jetProgressBar1.Value = 20;
 
             closeButtonImage = Properties.Resources.Close;
+
+
         }
 
         class DerivedDataGridView : DataGridView
@@ -737,7 +742,7 @@ namespace WinFormsApp1
         {
             formsPlot1.Plot.Clear();
 
-            
+
 
             for (int i = 0; i < 5; i++)
             {
@@ -750,7 +755,7 @@ namespace WinFormsApp1
                 // enable visibility of the box symbol
                 pop.Box.IsVisible = true;
                 pop.Box.FillColor = pop.Marker.MarkerLineColor.WithAlpha(.5);
-            //    pop.Marker.MarkerSize = 7;
+                //    pop.Marker.MarkerSize = 7;
 
             }
 
@@ -862,6 +867,25 @@ namespace WinFormsApp1
             //MouseNowCoordinates = formsPlot1.Plot.GetCoordinates(e.X, e.Y);
             //RectanglePlot.CoordinateRect = MouseSlectionRect;
             //formsPlot1.Refresh();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            if (odAnyFile.ShowDialog() == DialogResult.OK)
+                scintillaDiffControl1.TextLeft = File.ReadAllText(odAnyFile.FileName);
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            if (odAnyFile.ShowDialog() == DialogResult.OK)
+                scintillaDiffControl1.TextRight = File.ReadAllText(odAnyFile.FileName);
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            OptionForm from = new OptionForm();
+            from.ShowDialog();
+
         }
     }
 }

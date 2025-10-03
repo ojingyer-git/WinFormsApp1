@@ -39,9 +39,9 @@
             kryptonToolStrip1 = new Krypton.Toolkit.KryptonToolStrip();
             toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             kryptonDockingManager1 = new Krypton.Docking.KryptonDockingManager();
             kryptonManager1 = new Krypton.Toolkit.KryptonManager(components);
-            toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             toolStripContainer1.ContentPanel.SuspendLayout();
             toolStripContainer1.TopToolStripPanel.SuspendLayout();
             toolStripContainer1.SuspendLayout();
@@ -134,7 +134,7 @@
             kryptonToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3 });
             kryptonToolStrip1.Location = new System.Drawing.Point(3, 0);
             kryptonToolStrip1.Name = "kryptonToolStrip1";
-            kryptonToolStrip1.Size = new System.Drawing.Size(112, 25);
+            kryptonToolStrip1.Size = new System.Drawing.Size(81, 25);
             kryptonToolStrip1.TabIndex = 0;
             // 
             // toolStripButton1
@@ -157,10 +157,6 @@
             toolStripButton2.Text = "toolStripButton2";
             toolStripButton2.Click += toolStripButton2_Click;
             // 
-            // kryptonManager1
-            // 
-            kryptonManager1.GlobalPaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
-            // 
             // toolStripButton3
             // 
             toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -170,6 +166,10 @@
             toolStripButton3.Size = new System.Drawing.Size(23, 22);
             toolStripButton3.Text = "toolStripButton3";
             toolStripButton3.Click += toolStripButton3_Click;
+            // 
+            // kryptonManager1
+            // 
+            kryptonManager1.GlobalPaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             // 
             // ChildForm2
             // 

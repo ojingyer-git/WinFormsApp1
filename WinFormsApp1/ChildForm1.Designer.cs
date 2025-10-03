@@ -38,6 +38,10 @@ namespace WinFormsApp1
             tabPage2 = new System.Windows.Forms.TabPage();
             tabPage3 = new System.Windows.Forms.TabPage();
             scintilla1 = new ScintillaNET.Scintilla();
+            tabPage4 = new System.Windows.Forms.TabPage();
+            scintillaDiffControl1 = new ScintillaDiff.ScintillaDiffControl();
+            tabPage5 = new System.Windows.Forms.TabPage();
+            propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             pictureBox1 = new System.Windows.Forms.PictureBox();
             jetProgressBar1 = new JetProgressBar();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -51,10 +55,13 @@ namespace WinFormsApp1
             plot1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             plot2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             plot3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            tabPage4 = new System.Windows.Forms.TabPage();
+            odAnyFile = new System.Windows.Forms.OpenFileDialog();
+            toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -63,6 +70,8 @@ namespace WinFormsApp1
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage3.SuspendLayout();
+            tabPage4.SuspendLayout();
+            tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -107,6 +116,7 @@ namespace WinFormsApp1
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
+            tabControl1.Controls.Add(tabPage5);
             tabControl1.Location = new System.Drawing.Point(15, 88);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -170,6 +180,68 @@ namespace WinFormsApp1
             scintilla1.TabIndex = 0;
             scintilla1.Text = "scintilla1";
             // 
+            // tabPage4
+            // 
+            tabPage4.Controls.Add(scintillaDiffControl1);
+            tabPage4.Location = new System.Drawing.Point(4, 24);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            tabPage4.Size = new System.Drawing.Size(676, 762);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "tabPage4";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // scintillaDiffControl1
+            // 
+            scintillaDiffControl1.AddedCharacterSymbol = '+';
+            scintillaDiffControl1.CharacterComparison = true;
+            scintillaDiffControl1.CharacterComparisonMarkAddRemove = true;
+            scintillaDiffControl1.DiffColorAdded = System.Drawing.Color.FromArgb(212, 242, 196);
+            scintillaDiffControl1.DiffColorChangeBackground = System.Drawing.Color.FromArgb(252, 255, 140);
+            scintillaDiffControl1.DiffColorCharAdded = System.Drawing.Color.FromArgb(154, 234, 111);
+            scintillaDiffControl1.DiffColorCharDeleted = System.Drawing.Color.FromArgb(225, 125, 125);
+            scintillaDiffControl1.DiffColorDeleted = System.Drawing.Color.FromArgb(255, 178, 178);
+            scintillaDiffControl1.DiffStyle = ScintillaDiff.ScintillaDiffStyles.DiffStyle.DiffSideBySide;
+            scintillaDiffControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            scintillaDiffControl1.ImageRowAdded = (System.Drawing.Bitmap)resources.GetObject("scintillaDiffControl1.ImageRowAdded");
+            scintillaDiffControl1.ImageRowAddedScintillaIndex = 28;
+            scintillaDiffControl1.ImageRowDeleted = (System.Drawing.Bitmap)resources.GetObject("scintillaDiffControl1.ImageRowDeleted");
+            scintillaDiffControl1.ImageRowDeletedScintillaIndex = 29;
+            scintillaDiffControl1.ImageRowDiff = (System.Drawing.Bitmap)resources.GetObject("scintillaDiffControl1.ImageRowDiff");
+            scintillaDiffControl1.ImageRowDiffScintillaIndex = 31;
+            scintillaDiffControl1.ImageRowOk = (System.Drawing.Bitmap)resources.GetObject("scintillaDiffControl1.ImageRowOk");
+            scintillaDiffControl1.ImageRowOkScintillaIndex = 30;
+            scintillaDiffControl1.IsEntireLineHighlighted = false;
+            scintillaDiffControl1.Location = new System.Drawing.Point(3, 3);
+            scintillaDiffControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            scintillaDiffControl1.MarkColorIndexModifiedBackground = 31;
+            scintillaDiffControl1.MarkColorIndexRemovedOrAdded = 30;
+            scintillaDiffControl1.Name = "scintillaDiffControl1";
+            scintillaDiffControl1.RemovedCharacterSymbol = '-';
+            scintillaDiffControl1.Size = new System.Drawing.Size(670, 756);
+            scintillaDiffControl1.TabIndex = 0;
+            scintillaDiffControl1.TextLeft = "";
+            scintillaDiffControl1.TextRight = "";
+            scintillaDiffControl1.UseRowOkSign = false;
+            // 
+            // tabPage5
+            // 
+            tabPage5.Controls.Add(propertyGrid1);
+            tabPage5.Location = new System.Drawing.Point(4, 24);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            tabPage5.Size = new System.Drawing.Size(676, 762);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "tabPage5";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // propertyGrid1
+            // 
+            propertyGrid1.Location = new System.Drawing.Point(6, 0);
+            propertyGrid1.Name = "propertyGrid1";
+            propertyGrid1.Size = new System.Drawing.Size(274, 368);
+            propertyGrid1.TabIndex = 0;
+            // 
             // pictureBox1
             // 
             pictureBox1.Location = new System.Drawing.Point(15, 41);
@@ -188,7 +260,8 @@ namespace WinFormsApp1
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton1, toolStripDropDownButton1, toolStripButton2, toolStripDropDownButton2 });
+            toolStrip1.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton1, toolStripDropDownButton1, toolStripButton2, toolStripDropDownButton2, toolStripButton3, toolStripButton4, toolStripButton5 });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(1389, 25);
@@ -277,6 +350,26 @@ namespace WinFormsApp1
             plot3ToolStripMenuItem.Text = "Plot3";
             plot3ToolStripMenuItem.Click += plot3ToolStripMenuItem_Click;
             // 
+            // toolStripButton3
+            // 
+            toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButton3.Image = (System.Drawing.Image)resources.GetObject("toolStripButton3.Image");
+            toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton3.Name = "toolStripButton3";
+            toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            toolStripButton3.Text = "toolStripButton3";
+            toolStripButton3.Click += toolStripButton3_Click;
+            // 
+            // toolStripButton4
+            // 
+            toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButton4.Image = (System.Drawing.Image)resources.GetObject("toolStripButton4.Image");
+            toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton4.Name = "toolStripButton4";
+            toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            toolStripButton4.Text = "toolStripButton4";
+            toolStripButton4.Click += toolStripButton4_Click;
+            // 
             // statusStrip1
             // 
             statusStrip1.AutoSize = false;
@@ -301,15 +394,20 @@ namespace WinFormsApp1
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // tabPage4
+            // odAnyFile
             // 
-            tabPage4.Location = new System.Drawing.Point(4, 24);
-            tabPage4.Name = "tabPage4";
-            tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            tabPage4.Size = new System.Drawing.Size(676, 762);
-            tabPage4.TabIndex = 3;
-            tabPage4.Text = "tabPage4";
-            tabPage4.UseVisualStyleBackColor = true;
+            odAnyFile.FileName = "openFileDialog1";
+            odAnyFile.Filter = "All files|*.*";
+            // 
+            // toolStripButton5
+            // 
+            toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButton5.Image = (System.Drawing.Image)resources.GetObject("toolStripButton5.Image");
+            toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton5.Name = "toolStripButton5";
+            toolStripButton5.Size = new System.Drawing.Size(23, 22);
+            toolStripButton5.Text = "toolStripButton5";
+            toolStripButton5.Click += toolStripButton5_Click;
             // 
             // ChildForm1
             // 
@@ -330,6 +428,8 @@ namespace WinFormsApp1
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
+            tabPage4.ResumeLayout(false);
+            tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -367,5 +467,12 @@ namespace WinFormsApp1
         private System.Windows.Forms.TabPage tabPage3;
         private ScintillaNET.Scintilla scintilla1;
         private System.Windows.Forms.TabPage tabPage4;
+        private ScintillaDiff.ScintillaDiffControl scintillaDiffControl1;
+        private System.Windows.Forms.OpenFileDialog odAnyFile;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.PropertyGrid propertyGrid1;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
     }
 }

@@ -58,7 +58,7 @@ namespace WinFormsApp1
             //p.ImageSmall = imageListSmall.Images[image];
 
             // Add the control for display inside the page
-            textForm textF = new textForm();
+            TreeGrid textF = new TreeGrid();
             textF.Dock = DockStyle.Fill;
             textF.TopLevel = false; // 최상위 폼이 아님을 설정
             textF.FormBorderStyle = FormBorderStyle.None; // 폼의 테두리 없애기
@@ -88,19 +88,21 @@ namespace WinFormsApp1
 
         private void toolStripButton1_Click_1(object sender, EventArgs e)
         {
-            KryptonWorkspaceCell cell = kryptonDockableWorkspace1.ActiveCell;
-            if (cell == null)
-            {
-                cell = new KryptonWorkspaceCell();
-                kryptonDockableWorkspace1.Root.Children.Add(cell);
-            }
+            TreeGrid tr = new TreeGrid();
+            tr.ShowDialog();
+            //KryptonWorkspaceCell cell = kryptonDockableWorkspace1.ActiveCell;
+            //if (cell == null)
+            //{
+            //    cell = new KryptonWorkspaceCell();
+            //    kryptonDockableWorkspace1.Root.Children.Add(cell);
+            //}
 
-            // Create new document to be added into workspace
-            KryptonPage page = NewDocument("new");
-            cell.Pages.Add(page);
+            //// Create new document to be added into workspace
+            //KryptonPage page = NewDocument("new");
+            //cell.Pages.Add(page);
 
-            // Make the new page the selected page
-            cell.SelectedPage = page;
+            //// Make the new page the selected page
+            //cell.SelectedPage = page;
 
 
         }
