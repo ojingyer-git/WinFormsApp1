@@ -159,5 +159,22 @@ namespace WinFormsApp1
                 Console.WriteLine($"오류 발생: {ex.Message}");
             }
         }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            KryptonWorkspaceCell cell = kryptonDockableWorkspace1.ActiveCell;
+            if (cell == null)
+            {
+                cell = new KryptonWorkspaceCell();
+                kryptonDockableWorkspace1.Root.Children.Add(cell);
+            }
+
+            // Create new document to be added into workspace
+            KryptonPage page = NewPage("Draw ", 0, new DrawItem());
+            cell.Pages.Add(page);
+
+            // Make the new page the selected page
+            cell.SelectedPage = page;
+        }
     }
 }

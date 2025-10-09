@@ -42,6 +42,7 @@
             toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             kryptonDockingManager1 = new Krypton.Docking.KryptonDockingManager();
             kryptonManager1 = new Krypton.Toolkit.KryptonManager(components);
+            toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             toolStripContainer1.ContentPanel.SuspendLayout();
             toolStripContainer1.TopToolStripPanel.SuspendLayout();
             toolStripContainer1.SuspendLayout();
@@ -131,10 +132,10 @@
             // 
             kryptonToolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             kryptonToolStrip1.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
-            kryptonToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3 });
+            kryptonToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3, toolStripButton4 });
             kryptonToolStrip1.Location = new System.Drawing.Point(3, 0);
             kryptonToolStrip1.Name = "kryptonToolStrip1";
-            kryptonToolStrip1.Size = new System.Drawing.Size(81, 25);
+            kryptonToolStrip1.Size = new System.Drawing.Size(135, 25);
             kryptonToolStrip1.TabIndex = 0;
             // 
             // toolStripButton1
@@ -170,6 +171,16 @@
             // kryptonManager1
             // 
             kryptonManager1.GlobalPaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
+            // 
+            // toolStripButton4
+            // 
+            toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButton4.Image = (System.Drawing.Image)resources.GetObject("toolStripButton4.Image");
+            toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButton4.Name = "toolStripButton4";
+            toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            toolStripButton4.Text = "toolStripButton4";
+            toolStripButton4.Click += toolStripButton4_Click;
             // 
             // ChildForm2
             // 
@@ -210,5 +221,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem nextToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
     }
 }

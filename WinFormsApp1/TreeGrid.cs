@@ -155,7 +155,7 @@ namespace WinFormsApp1
                         {
                             TreeGridNode? node = nodes[preTab - 1].Nodes.Add(rows);
                             nodes.Add(node);
-                            //node.Expand();
+                            //node.Expand();  
                         }
                     }
                     else
