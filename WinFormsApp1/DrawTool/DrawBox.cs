@@ -128,6 +128,7 @@ namespace WinFormsApp1
             {
                 RectangleObject obj = new RectangleObject(i.pStart.X, i.pStart.Y, 1, 1);
                 obj.SetArgument(i.instructName, i.argumentLines, tempImage);
+                obj.BackColor = i.backColor;
                 MainController.Instance.GraphicModel.GrapList.Insert(0, obj);
                 MainController.Instance.GraphicModel.GrapList[0].MoveHandleTo(i.pEnd, 5);
                 MainController.Instance.GraphicModel.GrapList[0].Normalize();

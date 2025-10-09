@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenTK.Platform.Windows;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace DrawTool.DrawObjects
         private Image[] iconImage = new Image[5];
         private Rectangle textRect;
 
-        private int inoutSize = 10;
+        private int inoutSize = 12;
         private int tempBezier = 20;
 
         private const int inputConnectHandle = 101;
@@ -98,7 +99,7 @@ namespace DrawTool.DrawObjects
                 g.DrawRectangle(pen, RectangleObject.GetNormalizedRectangle(inputRect));
                 g.DrawRectangle(pen, RectangleObject.GetNormalizedRectangle(resultRect));
 
-                g.DrawRectangle(pen, RectangleObject.GetNormalizedRectangle(textRect));
+                
 
                 if (inputConnectObj != null)
                 {
@@ -159,10 +160,10 @@ namespace DrawTool.DrawObjects
                     g.DrawBezier(pen, pBezier[0], pBezier[1], pBezier[2], pBezier[3]);
                 }
 
-                //using (SolidBrush brush = new SolidBrush(BackColor))
-                //{
-                //    g.FillRectangle(brush, Rectangle);
-                //}
+                using (SolidBrush brush = new SolidBrush(BackColor))
+                {
+                    g.FillRectangle(brush, Rectangle);
+                }
 
                 //Image img = Image.FromFile("C:\\Users\\ke\\Downloads\\resize.png");
 
@@ -172,23 +173,22 @@ namespace DrawTool.DrawObjects
                         g.DrawImage(iconImage[i], iconRect[i]);
                 }
 
-                //Rectangle rect1 = new Rectangle(Rectangle.X + 2, Rectangle.Y + 2, 28, 28);
-                //g.DrawImage(WinFormsApp1.Properties.Resources.M1, rect1);
+                using (Font font2 = new Font(/*"Consols"*/"Arial", 7, FontStyle.Bold, GraphicsUnit.Point))
+                {
+                    //g.DrawRectangle(Pens.Black, Rectangle.Round(textRect));
+                    using (SolidBrush brush = new SolidBrush(SystemColors.GradientInactiveCaption))
+                    {
+                        g.FillRectangle(brush, textRect);
+                    }
 
-                //Rectangle rect2 = new Rectangle(rect1.Right + 2, rect1.Top, 16, 16);
-                //g.DrawImage(WinFormsApp1.Properties.Resources.tree2, rect2);
+                    // Specify the text is wrapped.
+                    TextFormatFlags flags = TextFormatFlags.WordBreak;
+                    TextRenderer.DrawText(g, instructName.Replace(" ", "\r\n"), font2, textRect, Color.DarkRed, flags);
+                    
+                    //g.DrawRectangle(pen, RectangleObject.GetNormalizedRectangle(textRect));
+                }
 
-                //Rectangle rect3 = new Rectangle(rect1.Right + 2, rect2.Bottom + 2, 16, 16);
-                ////g.DrawImage(WinFormsApp1.Properties.Resources.W, rect3);
 
-                //Rectangle rect4 = new Rectangle(rect1.X + 1, rect1.Bottom + 2, 13, 13);
-                //g.DrawImage(WinFormsApp1.Properties.Resources.W, rect4);
-
-                //Rectangle rect5 = new Rectangle(rect4.Right + 3, rect1.Bottom + 2, 13, 13);
-                //g.DrawImage(WinFormsApp1.Properties.Resources.R, rect5);
-
-                //Rectangle rect6 = new Rectangle(rect5.Right + 3, rect1.Bottom + 2, 13, 13);
-                //g.DrawImage(WinFormsApp1.Properties.Resources.repeat7, rect6);
             }
         }
 
@@ -206,19 +206,22 @@ namespace DrawTool.DrawObjects
         private void SetInOutRect()
         {
             inputRect = new Rectangle(rectangle.X - inoutSize, rectangle.Y + rectangle.Height / 2 - inoutSize / 2, inoutSize, inoutSize);
-            resultRect = new Rectangle(rectangle.X + rectangle.Width, rectangle.Y + rectangle.Height / 2 - inoutSize / 2, inoutSize + 1, inoutSize + 1);
+            resultRect = new Rectangle(rectangle.X + rectangle.Width, rectangle.Y + rectangle.Height / 2 - inoutSize / 2, inoutSize, inoutSize);
 
-            
+            iconRect[0] = new Rectangle(Rectangle.X + 2, Rectangle.Y + 2, 30, 30);
 
-            iconRect[0] = new Rectangle(Rectangle.X + 2, Rectangle.Y + 2, 28, 28);
+            iconRect[1] = new Rectangle(iconRect[0].Right + 2, iconRect[0].Top, 13, 13);
+            iconRect[2] = new Rectangle(iconRect[1].Right + 2, iconRect[0].Top, 13, 13);
+            iconRect[3] = new Rectangle(iconRect[0].Right + 3, iconRect[1].Bottom + 2, 13, 13);
+            iconRect[4] = new Rectangle(iconRect[1].Right + 3, iconRect[1].Bottom + 2, 13, 13);
 
-            iconRect[1] = new Rectangle(iconRect[0].Right + 2, iconRect[0].Top, 16, 16);
+            textRect = new Rectangle(rectangle.X, inputRect.Bottom, rectangle.Width, 25);
 
-            iconRect[2] = new Rectangle(iconRect[0].X + 1, iconRect[0].Bottom + 2, 13, 13);
-            iconRect[3] = new Rectangle(iconRect[2].Right + 3, iconRect[0].Bottom + 2, 13, 13);
-            iconRect[4] = new Rectangle(iconRect[3].Right + 3, iconRect[0].Bottom + 2, 13, 13);
+            //iconRect[2] = new Rectangle(iconRect[0].X + 1, iconRect[0].Bottom + 2, 13, 13);
+            //iconRect[3] = new Rectangle(iconRect[2].Right + 3, iconRect[0].Bottom + 2, 13, 13);
+            //iconRect[4] = new Rectangle(iconRect[3].Right + 3, iconRect[0].Bottom + 2, 13, 13);
 
-            textRect = new Rectangle(rectangle.X, iconRect[2].Bottom + 5, rectangle.Width, 20);
+            //textRect = new Rectangle(rectangle.X, iconRect[2].Bottom + 5, rectangle.Width, 20);
         }
         
         /// <summary>
@@ -466,6 +469,67 @@ namespace DrawTool.DrawObjects
 
             if (idx >= 10 && idx <= 35)
                 iconImage[0] = iconImages[idx];
+
+            int n = 1;
+            if (sp[0].Contains("JMP"))
+            {
+                iconImage[n] = WinFormsApp1.Properties.Resources.tree2;
+                n++;
+            }
+            else if (sp[0].Contains("IDXI"))
+            {
+                iconImage[n] = WinFormsApp1.Properties.Resources.repeat7;
+                n++;
+            }
+
+            bool[] bCheck = new bool[3];
+            for (int i = 0; i < 3; i++)
+                bCheck[i] = false;
+            foreach (string s in argumentLines)
+            {
+                sp = s.Split(" ");
+                foreach (string ss in sp)
+                {
+                    if (ss == "NOP" || ss == "XCYC")
+                        continue;
+
+                    if (ss.Contains("W"))
+                        bCheck[0] = true;
+                    if (ss.Contains("R"))
+                        bCheck[1] = true;
+                    else if (ss.Contains("<"))
+                        bCheck[2] = true;
+                }
+            }
+
+            bool bIcon = false;
+            for (int i = 0; i<3; i++)
+            {
+                if (bCheck[i])
+                {
+                    bIcon = true;
+                    switch (i)
+                    {
+                        case 0:
+                            iconImage[n] = WinFormsApp1.Properties.Resources.W;
+                            n++;
+                            break;
+                        case 1:
+                            iconImage[n] = WinFormsApp1.Properties.Resources.R;
+                            n++;
+                            break;
+                        case 2:
+                            iconImage[n] = WinFormsApp1.Properties.Resources.pin;
+                            n++;
+                            break;
+                    }
+
+                }
+                if (n >= 5)
+                    break;
+            }
+
+
 
             iconImage[1] = WinFormsApp1.Properties.Resources.tree2;
             iconImage[2] = WinFormsApp1.Properties.Resources.repeat7;

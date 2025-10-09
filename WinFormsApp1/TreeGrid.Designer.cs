@@ -46,7 +46,7 @@
             // 
             // kryptonToolStrip1
             // 
-            kryptonToolStrip1.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
+            kryptonToolStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
             kryptonToolStrip1.Location = new System.Drawing.Point(0, 0);
             kryptonToolStrip1.Name = "kryptonToolStrip1";
             kryptonToolStrip1.Size = new System.Drawing.Size(1142, 25);
@@ -103,6 +103,7 @@
             // 
             treeGridView1.AllowUserToAddRows = false;
             treeGridView1.AllowUserToDeleteRows = false;
+            treeGridView1.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
             treeGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Column5, Column6, Column7 });
             treeGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             treeGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;

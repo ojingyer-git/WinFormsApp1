@@ -18,6 +18,7 @@ namespace WinFormsApp1
             public Point pEnd;
             public string instructName;
             public List<string> argumentLines;
+            public Color backColor;
 
             public PatternItem()
             {
@@ -34,6 +35,17 @@ namespace WinFormsApp1
             InitializeComponent();
         }
 
+        public static Color GetRandomColor()
+        {
+            Random randomGen = new Random();
+            // 0부터 255 사이의 무작위 정수 값을 R, G, B 각 채널에 할당합니다.
+            int r = randomGen.Next(256); // 0부터 255까지의 정수
+            int g = randomGen.Next(256);
+            int b = randomGen.Next(256);
+
+            // 생성된 RGB 값으로 Color 객체를 생성합니다.
+            return Color.FromArgb(100, r, g, b);
+        }
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             List<PatternItem> items = new List<PatternItem>();
@@ -45,7 +57,7 @@ namespace WinFormsApp1
             item.argumentLines.Add("NOP XCYC");
             item.argumentLines.Add("NOP XCYC");
             item.argumentLines.Add("NOP XCYC");
-
+            item.backColor = GetRandomColor();
             items.Add(item);
 
             item = new PatternItem();
@@ -55,11 +67,12 @@ namespace WinFormsApp1
             item.argumentLines.Add("NOP XCYC");
             item.argumentLines.Add("NOP XCYC");
             item.argumentLines.Add("NOP XCYC");
+            item.backColor = GetRandomColor();
 
             items.Add(item);
 
             Point st = new Point(20, 20);
-            int xSize = 50, ySize = 50;
+            int xSize = 65, ySize = 61;
             int dummyX = 40, dummyY = 30;
             int x = 0, y = 0;
             foreach (var i in items)

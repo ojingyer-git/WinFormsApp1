@@ -133,6 +133,16 @@ namespace WinFormsApp1.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap help {
+            get {
+                object obj = ResourceManager.GetObject("help", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap M1 {
             get {
                 object obj = ResourceManager.GetObject("M1", resourceCulture);
@@ -146,6 +156,16 @@ namespace WinFormsApp1.Properties {
         internal static System.Drawing.Bitmap N1 {
             get {
                 object obj = ResourceManager.GetObject("N1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap pin {
+            get {
+                object obj = ResourceManager.GetObject("pin", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
